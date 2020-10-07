@@ -47,13 +47,16 @@ Redirections:
 - Grep searches text files for occurrences of regular expressions
 - Common flags include `-r` to recursively search and `-i` to ignore case
 
-#### Sed
+#### sed
 - Sed is an stream editor
 - `echo "I love Windows" | sed 's/Windows/GNU\/Linux/'`
 
-#### Cut
+#### cut
 - Extract sections from a line and send it to stdout
 ```
 echo "pear,apple,banana" | cut -d "," -f 2
 apple
 ```
+
+### awk
+```echo "hello::there::friend" | awk -F "::" '{print $1, $3}'```
