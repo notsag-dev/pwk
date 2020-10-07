@@ -41,3 +41,19 @@ Redirections:
 - Redirect to new file: `echo "whatever" > newfile.txt`
 - Append to existing file: `echo "whatever" >> existing_file.txt"`
 - Redirecting stderr: According to POSIX, stdin, stdout and stderr are defined by 0, 1, 2. To redirect the stderr we can append `2>errors.txt` to the command. Also doing `2>/dev/null` is helpful for ignoring errors.
+
+### Text search and manipulation
+#### Grep
+- Grep searches text files for occurrences of regular expressions
+- Common flags include `-r` to recursively search and `-i` to ignore case
+
+#### Sed
+- Sed is an stream editor
+- `echo "I love Windows" | sed 's/Windows/GNU\/Linux/'`
+
+#### Cut
+- Extract sections from a line and send it to stdout
+```
+echo "pear,apple,banana" | cut -d "," -f 2
+apple
+```
