@@ -58,5 +58,5 @@ echo "pear,apple,banana" | cut -d "," -f 2
 apple
 ```
 
-### awk
+#### awk
 ```echo "hello::there::friend" | awk -F "::" '{print $1, $3}'```
