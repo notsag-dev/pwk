@@ -30,3 +30,12 @@
 - History returns a number for each entry. Run it again with `!{{command number}}`
 - Repeat last command with `!!`
 - Set `HISTSIZE` to configure the number of commands saved in memory for the current session, and `HISTFILESIZE` to configure the total size of the bash history.
+
+### Piping and redirection
+Programs executed from the command line have 3 streams:
+- stdin: Program input
+- stdout: Program output (default terminal)
+- stderr: Errors (default terminal)
+
+Redirect to new file: `echo "whatever" > newfile.txt`
+Append to existing file: `echo "whatever" >> existing_file.txt"`
