@@ -11,3 +11,5 @@
 - `sudo systemctl start ssh`
 - Check that service is running: `sudo ss -antlp | grep sshd`
 - To start ssh at boot time run: `sudo systemctl enable ssh`
+- To start an Apache http server: `sudo systemctl start apache2`
+- See all available services: `systemctl list-unit-files`
