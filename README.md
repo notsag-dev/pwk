@@ -22,3 +22,11 @@
 - Install with `apt install`
 - Completely remove package, including all config files, with `apt remove --purge {{package name}}`
 - To install .deb package: `dpkg -i {{route to deb file}}`
+
+### Bash shell
+- Display id of the current shell instance: `echo $$`
+- Display all env vars: `env`
+- Display history with: `history`
+- History returns a number for each entry. Run it again with `!{{command number}}`
+- Repeat last command with `!!`
+- Set `HISTSIZE` to configure the number of commands saved in memory for the current session, and `HISTFILESIZE` to configure the total size of the bash history.
