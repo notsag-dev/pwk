@@ -1,5 +1,5 @@
 # linux-tips
 
 ### `man`
-- Keyword search: `man -k keyword {{app}}`
-- Search for keywords in all man pages using apropos: `apropos {{keyword}}`
+- Keyword search in all man pages: `man -k keyword`
+- Search using apropos (equivalent to man -k): `apropos {{keyword}}`
