@@ -37,5 +37,7 @@ Programs executed from the command line have 3 streams:
 - stdout: Program output (default terminal)
 - stderr: Errors (default terminal)
 
-Redirect to new file: `echo "whatever" > newfile.txt`
-Append to existing file: `echo "whatever" >> existing_file.txt"`
+Redirections:
+- Redirect to new file: `echo "whatever" > newfile.txt`
+- Append to existing file: `echo "whatever" >> existing_file.txt"`
+- Redirecting stderr: According to POSIX, stdin, stdout and stderr are defined by 0, 1, 2. To redirect the stderr we can append `2>errors.txt` to the command. Also doing `2>/dev/null` is helpful for ignoring errors.
