@@ -13,3 +13,12 @@
 - To start ssh at boot time run: `sudo systemctl enable ssh`
 - To start an Apache http server: `sudo systemctl start apache2`
 - See all available services: `systemctl list-unit-files`
+
+### `apt` and `dpkg`
+- Update packages cache, repositories, versions, descriptions: `apt update`
+- To upgrade the system run `apt upgrade`, to upgrade just one package `apt upgrade {{package name}}`
+- To search in the internal cache packages db: `apt-cache search {{keyword}}`
+- Show package information: `apt show {{package name}}`
+- Install with `apt install`
+- Completely remove package, including all config files, with `apt remove --purge {{package name}}`
+- To install .deb package: `dpkg -i {{route to deb file}}`
