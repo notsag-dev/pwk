@@ -43,7 +43,7 @@ Redirections:
 - Redirecting stderr: According to POSIX, stdin, stdout and stderr are defined by 0, 1, 2. To redirect the stderr we can append `2>errors.txt` to the command. Also doing `2>/dev/null` is helpful for ignoring errors.
 
 ### Text search and manipulation
-#### Grep
+#### grep
 - Grep searches text files for occurrences of regular expressions
 - Common flags include `-r` to recursively search and `-i` to ignore case
 
@@ -59,4 +59,7 @@ apple
 ```
 
 #### awk
-```echo "hello::there::friend" | awk -F "::" '{print $1, $3}'```
+```
+echo "hola::friend::amigo" | awk -F "::" '{print $1, $3}'
+hola amigo
+```
