@@ -76,3 +76,6 @@ Displays results in 3 columns:
 3) lines just present in file2
 
 Removing lines: ```-{1}{2}{3}``` eg. ```-12``` removes columns 1 and 2.
+
+### vimdiff
+Open vim with the diff open in 2 buffers, much clearer than diff or comm in my opinion.
