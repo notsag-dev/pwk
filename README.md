@@ -65,3 +65,14 @@ apple
 echo "hola::friend::amigo" | awk -F "::" '{print $1, $3}'
 hola amigo
 ```
+
+#### comm
+```
+comm file1.txt file2.txt
+```
+Displays results in 3 columns:
+1) lines just present in file1
+2) lines in both files
+3) lines just present in file2
+
+Removing lines: ```-{1}{2}{3}``` eg. ```-12``` removes columns 1 and 2.
