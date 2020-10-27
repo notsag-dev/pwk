@@ -79,3 +79,6 @@ Removing lines: ```-{1}{2}{3}``` eg. ```-12``` removes columns 1 and 2.
 
 ### vimdiff
 Open vim with the diff open in 2 buffers, much clearer than diff or comm in my opinion.
+
+### Background process
+The quickest way to background a process is to append an ampersand (&) to the end of the command to send it to the background immediately after it starts.
