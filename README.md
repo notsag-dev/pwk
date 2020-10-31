@@ -119,8 +119,13 @@ Download just specific file types:
 curl -o {{output_file}} {{url}}
 ```
 
-### axel
+### `axel`
 Download acceleration using several processes (given by the -n flag):
 ```
 axel -a -n 20 -o report_axel.pdf https://www.offensive-security.com/reports/penetration-testing-sample-report-2013.pdf
+```
+
+### `alias`
+```
+alias alias_name="command"
 ```
