@@ -129,3 +129,4 @@ axel -a -n 20 -o report_axel.pdf https://www.offensive-security.com/reports/pene
 ```
 alias alias_name="command"
 ```
+`unalias` unsets an alias.
