@@ -44,6 +44,8 @@ Redirections:
 
 ### Text search and manipulation
 #### sort
+Sort by field 1: ```sort -k1```
+Sort desc: ```sort -r```
 
 #### grep
 - Grep searches text files for occurrences of regular expressions
@@ -104,4 +106,11 @@ Monitor the end portion of a log file with `tail -f`. Get last x lines with `tai
 ### `watch`
 Repeat a command each n seconds (2 by default) and continuously watch its output. Watch the execution of the `w` command each 5 seconds:
 ```watch -n 5 w```
+
+### `wget`
+Download with output file name:
+```wget -O {{output_file}} url```
+
+Download just specific file types:
+```wget -A '*.pdf -r example.com ```
 
