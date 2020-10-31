@@ -109,8 +109,12 @@ Repeat a command each n seconds (2 by default) and continuously watch its output
 
 ### `wget`
 Download with output file name:
-```wget -O {{output_file}} url```
+```wget -O {{output_file}} {{url}}```
 
 Download just specific file types:
 ```wget -A '*.pdf -r example.com ```
 
+### `curl`
+```
+curl -o {{output_file}} {{url}}
+```
