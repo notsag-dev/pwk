@@ -98,5 +98,10 @@ It also works in powershell, it is an alias to ```Get-Process cmdlet```.
 - `ps -ef`: select all processes in full format listing
 - `ps -fC {{application name}}`: search by app name (I tried this and it didn't really show the process I was looking for)
 
+### `tail`
+Monitor the end portion of a log file with `tail -f`. Get last x lines with `tail -nx`.
 
+### `watch`
+Repeat a command each n seconds (2 by default) and continuously watch its output. Watch the execution of the `w` command each 5 seconds:
+```watch -n 5 w```
 
