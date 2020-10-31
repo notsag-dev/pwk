@@ -82,3 +82,21 @@ Open vim with the diff open in 2 buffers, much clearer than diff or comm in my o
 
 ### Background process
 The quickest way to background a process is to append an ampersand (&) to the end of the command to send it to the background immediately after it starts.
+
+Other related commands:
+- ctrl + z to suspend a process
+- `bg` to resume the process suspended in the background
+- `fg` returns a process to the foreground
+- `jobs` lists all process being executed from the current terminal session
+- `fg %{{process_number}}` foregrounds the process with number process_number (processes are listed with their number when running jobs)
+- it can also be `fg %{{beginning of the command}}`
+
+### `ps` (process status)
+Unlike jobs, it lists processes system-wide.
+It also works in powershell, it is an alias to ```Get-Process cmdlet```.
+
+- `ps -ef`: select all processes in full format listing
+- `ps -fC {{application name}}`: search by app name (I tried this and it didn't really show the process I was looking for)
+
+
+
