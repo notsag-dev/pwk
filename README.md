@@ -224,3 +224,16 @@ Then execute it passing directly the encoded string to powershell using the -E f
 ```
 powershell -E {{paste the base64 encoded payload}}
 ```
+
+### `tcpdump`
+- Open existing capture file: `sudo tcpdump -r password_cracking_filtered.pcap`
+- Filtering traffic:
+  - Get ip + port ($3), order them and count how many time each combination appears in the file:
+```
+sudo tcpdump -n -r password_cracking_filtered.pcap | awk -F" " '{print $3 }' | sort | uniq -c | head
+```
+  - Tcpdump also includes filters:
+    - `tcpdump src host {{source host}}`
+    - `tcpdump dst host {{destination host}}`
+    - `tcpdump port {{port}}`
+- Dump packet contents in hexa and ascii by adding `-X`
