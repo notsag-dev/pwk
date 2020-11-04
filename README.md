@@ -152,6 +152,7 @@ Similar to netcat with some extra features.
 - Create self-signed certificate to add encryption to the connection:
 ```
 openssl req -newkey rsa:2048 -nodes -keyout bind_shell.key -x509 -days 36 -out bind_shell.crt
+cat bind_shell.key bind_shell.crt > bind_shell.pem
 ```
 - Bind shell securely:
 ```
