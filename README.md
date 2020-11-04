@@ -238,4 +238,4 @@ sudo tcpdump -n -r password_cracking_filtered.pcap | awk -F" " '{print $3 }' | s
     - `tcpdump dst host {{destination host}}`
     - `tcpdump port {{port}}`
 - Dump packet contents in hexa and ascii by adding `-X`
-- To get packets that have ACK + PSH add: `'tcp[13] = 24'`
+- To get tcp packets that have ACK + PSH (data packets) add: `'tcp[13] = 24'`
