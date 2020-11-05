@@ -262,3 +262,25 @@ fi
 ```
 <img src="https://i.imgur.com/E17rdBa.png" alt="drawing" width="500"/>
 
+- Use `&&` to execute a command just if the last command was successful and `||` if it failed.
+```
+grep $user2 /etc/passwd && echo "$user2 found!" || echo "$user2 not found !"
+```
+Note they are also the `and` and `or` logical operators.
+- For general structure:
+```
+for var-name in <list>
+do
+<action to perform>
+done
+```
+  - Loop one-liners examples:
+    - `for ip in $(seq 1 10); do echo 10.11.1.$ip; done`
+    - `for ip in {1..10}; do echo 10.11.1.$ip; done`
+- While structure:
+```
+while [ <some test> ]
+do
+<perform an action>
+done
+```
