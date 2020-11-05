@@ -284,3 +284,15 @@ do
 <perform an action>
 done
 ```
+- Function:
+```
+function function_name {
+  commands...
+}
+```
+or
+```
+function_name () {
+  commands...
+}
+```
