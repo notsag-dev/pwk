@@ -49,7 +49,7 @@ Sort desc: ```sort -r```
 
 #### grep
 - Grep searches text files for occurrences of regular expressions
-- Common flags include `-r` to recursively search and `-i` to ignore case
+- Common flags include `-r` to recursively search, `-i` to ignore case and `-v` to do a reverse grep (exclude matching lines)
 - Find subdomains: `grep -o '[^/]*\.site\.com' index.html | sort -u > list.txt`
 
 #### sed
