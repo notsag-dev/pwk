@@ -310,3 +310,33 @@ pass_arg $RANDOM
 for url in $(cat list.txt); do host $url; done
 ```
 - Get capture of site: `cutycapt --url=$ip --out=$ip.png`
+
+### OSINT
+- Check page for contacts -> verify social media
+- `whois {{domain name}}`
+
+#### Google
+- `site:{{site}}`
+- `filetype:{{filetype eg php}}`
+- Exclude filetype: `-filetype:php`
+- `intitle:"index of"`
+- https://www.exploit-db.com/google-hacking-database
+
+#### [Netcraft](https://netcraft.com)
+- Search for dns information at https://searchdns.netcraft.com
+- Check report for getting detailed information about the server
+- The report also has a "Site Technology" section that lists technologies of the server
+
+#### recon-ng
+- Search available modules: `marketplace search {{keyword | leave empty to list all}}`
+  - Note the columns D (has dependencies) and K (requires keys). See info of module for details.
+- Get module info: `marketplace info {{module path}}
+- Install module: `marketplace install {{module path}}`
+- Load module: `modules load {{module path}}`
+- Get info after loading module (including variables to set): `info`
+- Set option: `options set {{option}} {{value}}`
+- Run: `run`
+- Unload module: `back`
+- Show what was obtained so far: `show`
+
+- 
