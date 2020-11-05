@@ -239,3 +239,15 @@ sudo tcpdump -n -r password_cracking_filtered.pcap | awk -F" " '{print $3 }' | s
     - `tcpdump port {{port}}`
 - Dump packet contents in hexa and ascii by adding `-X`
 - To get tcp packets that have ACK + PSH (data packets) add: `'tcp[13] = 24'`
+
+### `bash`
+- Start scripts with `!#/bin/bash`. `!#` is called she-bang.
+- Declare variable: `hello=holaaa`
+- Reference variable: `echo $hello`
+- Quoting strings:
+  - Single quotes: `'hola'`. Bash treats all characters as literals.
+  - Double quotes: `"hola"`. All characters exepting `$` and `\` are treated as literals:
+- Save the result of a command in a variable:
+  - `result=$(whoami)` (preferred option)
+  - ``` result=`whoami` ```
+- Add `#!/bin/bash -x` to print the code being executed also and not just its output.
