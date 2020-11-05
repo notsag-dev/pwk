@@ -309,3 +309,4 @@ pass_arg $RANDOM
 ```
 for url in $(cat list.txt); do host $url; done
 ```
+- Get capture of site: `cutycapt --url=$ip --out=$ip.png`
