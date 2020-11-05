@@ -50,6 +50,7 @@ Sort desc: ```sort -r```
 #### grep
 - Grep searches text files for occurrences of regular expressions
 - Common flags include `-r` to recursively search and `-i` to ignore case
+- Find subdomains: `grep -o '[^/]*\.site\.com' index.html | sort -u > list.txt`
 
 #### sed
 - Sed is an stream editor
@@ -296,3 +297,11 @@ function_name () {
   commands...
 }
 ```
+- Passing args:
+```
+pass_arg() {
+  echo "Today's random number is: $1"
+}
+pass_arg $RANDOM
+```
+- Local variables: `local name="Joe"`
