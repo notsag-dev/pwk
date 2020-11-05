@@ -305,3 +305,7 @@ pass_arg() {
 pass_arg $RANDOM
 ```
 - Local variables: `local name="Joe"`
+- Iterate over file lines:
+```
+for url in $(cat list.txt); do host $url; done
+```
