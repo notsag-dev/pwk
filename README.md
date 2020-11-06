@@ -344,4 +344,9 @@ for url in $(cat list.txt); do host $url; done
 ### Open Source
 Tools:
 - [Gitrob](https://github.com/michenriksen/gitrob): Gitrob is a tool to help find potentially sensitive files pushed to public repositories on Github. Gitrob will clone repositories belonging to a user or organization down to a configurable depth and iterate through the commit history and flag files that match signatures for potentially sensitive files. The findings will be presented through a web interface for easy browsing and analysis.
-- [Gitleaks](https://github.com/zricethezav/gitleaks): Gitleaks is a SAST tool for detecting hardcoded secrets like passwords, api keys, and tokens in git repos. 
+  - Example: `GITROB_ACCESS_TOKEN={{yourtoken}} ./gitrob {{username}}`
+  - Install by downloading the binary, it didn't work for me in any other way.
+- [Gitleaks](https://github.com/zricethezav/gitleaks): Gitleaks is a SAST tool for detecting hardcoded secrets like passwords, api keys, and tokens in git repos.
+`gitleaks -r {{repository}}`
+
+
