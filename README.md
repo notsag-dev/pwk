@@ -341,7 +341,7 @@ for url in $(cat list.txt); do host $url; done
 - Resolve hosts IPs: `recon/hosts-hosts/resolve`
 - For github modules, generate token at https://github.com/settings/tokens. Then add it using `key add github_api {{key}}`
 
-### Open Source
+#### Open Source
 Tools:
 - [Gitrob](https://github.com/michenriksen/gitrob): Gitrob is a tool to help find potentially sensitive files pushed to public repositories on Github. Gitrob will clone repositories belonging to a user or organization down to a configurable depth and iterate through the commit history and flag files that match signatures for potentially sensitive files. The findings will be presented through a web interface for easy browsing and analysis.
   - Example: `GITROB_ACCESS_TOKEN={{yourtoken}} ./gitrob {{username}}`
@@ -349,4 +349,14 @@ Tools:
 - [Gitleaks](https://github.com/zricethezav/gitleaks): Gitleaks is a SAST tool for detecting hardcoded secrets like passwords, api keys, and tokens in git repos.
 `gitleaks -r {{repository}}`
 
+#### Shodan
+Search `hostname:{{domain}}`
 
+#### Headers scan
+Search site on `https://securityheaders.com` to analyze headers.
+
+#### SSL verifications
+Search site on `https://www.ssllabs.com/ssltest/` to analyze SSL security.
+
+#### Pastebin
+Search for domain names on pastebin, or anything else.
