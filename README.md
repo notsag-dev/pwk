@@ -360,3 +360,98 @@ Search site on `https://www.ssllabs.com/ssltest/` to analyze SSL security.
 
 #### Pastebin
 Search for domain names on pastebin, or anything else.
+
+#### `theharvester`
+`theHarvester -d {{domain}} -b {{source of info e.g. google}}`
+
+#### Social-Searcher
+Web that need will find results in social media about the domain.
+
+#### Twofi
+Analyzes a Twitter user's feed to generate a personalized wordlist. Requires Twitter API key.
+
+#### linkedin2username
+Generates usernames based on Linkedin data.
+
+#### OSINT Framework
+List of tools/techniques to get open source information.
+https://osintframework.com/
+
+#### Maltego
+
+### Active information gathering - DNS
+#### Types of DNS records
+- NS: Nameserver records contain the name of the authoritative servers hosting the DNS records for a domain
+- A: Also known as a host record, the a record contains the IP address of a hostname (such as www.duckduckgo.com)
+- MX: Mail Exchange records contain the names of the servers responsible for handling email for the domain
+- PTR: Pointer Records are used in reverse lookup zones and are used to find the records associated with an IP address
+- CNAME: Canonical Name Records are used to create aliases for other host records
+- TXT: Text records can contain any arbitrary data and can be used for various purposes, such as domain ownership verification
+
+##### `host`
+By default it gets an A and a MX records:
+```
+$ host duckduckgo.com
+duckduckgo.com has address 191.235.123.80
+host twtittduckduckgo.com mail is handled by 0 duckduckgo-com.mail.protection.outlook.com.
+```
+
+Get other types of records using the -t parameter:
+```
+$ host -t MX duckduckgo.com
+duckduckgo.com mail is handled by 0 duckduckgo-com.mail.protection.outlook.com.
+
+$ host -t TXT duckduckgo.com
+duckduckgo.com descriptive text "ZOOM_verify_QSjXtfOfRHiY0O9gD5E4Ug"
+duckduckgo.com descriptive text "MS=ms71454350"
+duckduckgo.com descriptive text "v=spf1 include:mailer.duckduckgo.com include:amazonses.com include:spf.protection.outlook.com -all"
+
+$ host -t CNAME duckduckgo.com
+duckduckgo.com has no CNAME record
+
+$ host -t PTR duckduckgo.com
+duckduckgo.com has no PTR record
+
+$ host -t NS duckduckgo.com
+duckduckgo.com name server ns04.quack-dns.com.
+duckduckgo.com name server dns4.p05.nsone.net.
+duckduckgo.com name server dns3.p05.nsone.net.
+duckduckgo.com name server ns02.quack-dns.com.
+duckduckgo.com name server dns1.p05.nsone.net.
+duckduckgo.com name server ns01.quack-dns.com.
+duckduckgo.com name server ns03.quack-dns.com.
+duckduckgo.com name server dns2.p05.nsone.net.
+```
+
+Passing "any" as type will fetch any record type:
+```
+$ host -t any duckduckgo.com
+duckduckgo.com host information "RFC8482" ""
+duckduckgo.com has address 191.235.123.80
+duckduckgo.com name server ns03.quack-dns.com.
+duckduckgo.com name server dns3.p05.nsone.net.
+duckduckgo.com name server dns2.p05.nsone.net.
+duckduckgo.com name server dns4.p05.nsone.net.
+duckduckgo.com name server ns01.quack-dns.com.
+duckduckgo.com name server ns04.quack-dns.com.
+duckduckgo.com name server ns02.quack-dns.com.
+duckduckgo.com name server dns1.p05.nsone.net.
+```
+
+###### Forward lookup bruteforce
+Forward lookup means that we get DNS information from a host name. Bruteforcing it would mean to try several subdomains to determine if they exist or not:
+```
+for ip in $(cat list.txt); do host $ip.megacorpone.com; done
+```
+
+###### Reverse lookup bruteforce
+Once an IP address is found for a domain, it may be useful to try IPs in the same range:
+```
+for ip in $(seq 50 100); do host 38.100.193.$ip; done | grep -v "not found"
+```
+
+#### DNS zone transfers
+The DNS is broken up into many different zones. These zones differentiate between distinctly managed areas in the DNS namespace. A DNS zone is a portion of the DNS namespace that is managed by a specific organization or administrator. A zone transfer is basically a database replication between related DNS servers in which the zone file is copied from a master DNS server to a slave server. The zone file contains a list of all the DNS names configured for that zone. Zone transfers should only be allowed to authorized slave DNS servers but many administrators misconfigure their DNS servers, and in these cases, anyone asking for a copy of the DNS server zone will usually receive one.
+```
+host -l {{domain name}} {{dns server address}}
+```
