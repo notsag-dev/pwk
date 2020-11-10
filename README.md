@@ -455,3 +455,42 @@ The DNS is broken up into many different zones. These zones differentiate betwee
 ```
 host -l {{domain name}} {{dns server address}}
 ```
+
+Check all zone transfers for a domain (linkedin.com in this example):
+```
+host -t NS site.com | awk -F" " '{ print $4 }' | xargs -I{} host -l site.com {} | grep "has address"
+```
+
+##### `dnsrecon`
+Zone transfers with dnsrecon:
+```
+dnsrecon -d site.com -t axfr
+```
+
+Forward lookup bruteforce:
+```
+dnsrecon -d site.com -D ~/list.txt -t brt
+```
+
+#### Port scanning
+##### Netcat
+Netcat TCP port scanning:
+```
+nc -nvv -w 1 -z 10.11.1.220 3388-3390
+```
+-w specifies the connection timeout in seconds and -z indicates a zero-I/O mode (not sending any information but just creating the connection.
+
+Netcat UDP port scanning:
+```
+nc -nvv -w 1 -z -u 10.11.1.115 160-162
+```
+##### Nmap
+###### Stealth/SYN scan
+- The default scan type in nmap is the stealth/syn scan (-sS).
+- It does not complete the TCP handshake as it just sends a SYN packet and waits for the SYN-ACK from the server.
+- Requests using this type of scan would not appear in application logs but a firewall definitely registers it nowadays.
+
+###### TCP connect scan
+- The TCP connect scan (-sT) completes a TCP handshake to check if a port is open or not.
+- It uses the Berkeley sockets API.
+- It takes longer to complete than a SYN scan.
