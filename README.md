@@ -500,3 +500,36 @@ nc -nvv -w 1 -z -u 10.11.1.115 160-162
 - For well-known ports, the port scanner will send a protocol-specific packet.
 - For the rest, an empty UDP packet is sent to a specific port. If the destination UDP port is open, the packet will be passed to the application layer and the response received will depend on how the application is programmed to respond to empty packets. However, if the destination UDP port is closed, the target responds with an ICMP port unreachable.
 
+###### TCP & UDP
+TCP and UDP scans can be executed together adding -sS and -sT flags.
+
+###### Network sweeping
+It consists of probing servers using ICMP echo requests but also trying other probing methods such us sending a TCP SYN packet to port 443, a TCP ACK packet to port 80, and an ICMP timestamp request to verify if a host is available or not.
+
+###### NSE scripts
+NSE scripts are located at `/usr/share/nmap/scripts`
+To execute one specific script add --script=script_name. E.g. to execute a dns zone transfer:
+```
+nmap --script=dns-zone-transfer -p 53 ns2.megacorpone.com
+```
+Get information about a specific script:
+```
+ nmap --script-help dns-zone-transfer
+```
+
+###### Other flags:
+--top-ports=20 for top 20 ports. Check the list of all ports and their frequency calculate the top ones here: `/usr/share/nmap/nmap-services`
+-O for OS fingerprinting
+-sV for version detection (through banner grabbing)
+
+##### SMB enumeration
+Server Message Block (SMB) runs on the port 445. At the same time, NetBIOS which is a session layer protocol that runs on port 139 that allows computers communicate is used by SMB. Nmap scan of them:
+```
+ nmap -v -p 139,445 -oG smb.txt 10.11.1.1-254
+```
+
+Also use the more specific tool to get info about NetBIOS: `nbtscan`:
+```
+sudo nbtscan -r 10.11.1.0/24
+```
+
