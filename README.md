@@ -485,12 +485,18 @@ Netcat UDP port scanning:
 nc -nvv -w 1 -z -u 10.11.1.115 160-162
 ```
 ##### Nmap
-###### Stealth/SYN scan
-- The default scan type in nmap is the stealth/syn scan (-sS).
+###### Stealth/SYN scan (-sS)
+- The default scan type in nmap is the stealth/syn scan.
 - It does not complete the TCP handshake as it just sends a SYN packet and waits for the SYN-ACK from the server.
 - Requests using this type of scan would not appear in application logs but a firewall definitely registers it nowadays.
 
-###### TCP connect scan
-- The TCP connect scan (-sT) completes a TCP handshake to check if a port is open or not.
+###### TCP connect scan (-sT)
+- The TCP connect scan completes a TCP handshake to check if a port is open or not.
 - It uses the Berkeley sockets API.
 - It takes longer to complete than a SYN scan.
+
+###### UDP scan (-sU with sudo)
+2 different methods are combined to do a UDP scan:
+- For well-known ports, the port scanner will send a protocol-specific packet.
+- For the rest, an empty UDP packet is sent to a specific port. If the destination UDP port is open, the packet will be passed to the application layer and the response received will depend on how the application is programmed to respond to empty packets. However, if the destination UDP port is closed, the target responds with an ICMP port unreachable.
+
