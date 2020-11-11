@@ -582,7 +582,7 @@ If the new user has id 1001, we change it to 1014 in /etc/password:
 sudo sed -i -e 's/1001/1014/g' /etc/passwd
 ```
 
-##### SMTP enumeration
+#### SMTP enumeration
 The Simple Mail Transport Protocol supports several interesting commands, such as VRFY and EXPN. A VRFY request asks the server to verify an email address, while EXPN asks the server for the membership of a mailing list.
 
 ```
@@ -595,7 +595,7 @@ VRFY idontexist
 550 5.1.1 <idontexist>: Recipient address rejected: User unknown in local recipient table
 ```
 
-##### SNMP enumeration
+#### SNMP enumeration
 Over the years, we have often found that the Simple Network Management Protocol (SNMP) is not well-understood by many network administrators. This often results in SNMP misconfigurations, which can result in significant information leakage.
 
 Issues:
@@ -603,7 +603,7 @@ Issues:
 - SNMP protocols 1, 2, and 2c offer no traffic encryption.
 - Traditional SNMP protocols also have weak authentication schemes and are commonly left configured with default public and private community strings.
 
-###### The SNMP MIB Tree
+##### The SNMP MIB Tree
 The SNMP Management Information Base (MIB) is a database containing information usually related to network management. It has OIDs of resources that can be monitored.
 
 Scan for SNMP:
@@ -621,7 +621,7 @@ onesixtyone -c community -i ips
 
 Once we find SNMP services, we can start querying them for specific MIB data that might be interesting.
 
-###### Windows SNMP enumeration example
+##### Windows SNMP enumeration example
 Scan with snmpwalk using `-c` to set public as the community string, `-v1` to specify snmp version to 1, and `-t` to set timeout perioud to 10 sec.
 ```
 snmpwalk -c public -v1 -t 10 10.11.1.14
