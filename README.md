@@ -517,6 +517,8 @@ Get information about a specific script:
  nmap --script-help dns-zone-transfer
 ```
 
+The file `/usr/share/nmap/scripts/script.db` contains all the scripts with their categories (vuln, discovery, etc)
+
 ###### Other flags:
 --top-ports=20 for top 20 ports. Check the list of all ports and their frequency calculate the top ones here: `/usr/share/nmap/nmap-services`
 -O for OS fingerprinting
@@ -647,6 +649,7 @@ Enumerate installed software:
 snmpwalk -c public -v1 10.11.1.50 1.3.6.1.2.1.25.6.3.1.2
 ```
 
-###
+#### Nmap vuln detection
+
 
 
