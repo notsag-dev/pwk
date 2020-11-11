@@ -649,7 +649,12 @@ Enumerate installed software:
 snmpwalk -c public -v1 10.11.1.50 1.3.6.1.2.1.25.6.3.1.2
 ```
 
-#### Nmap vuln detection
+### Web Applications Assessment
+Tips:
+- Check "Server" response header to get used web server
+- Headers starting by "X-" are non-standard HTTP headers
+- In Firefox's debugger tab, when checking a JS source file, press the curly brackets to expand code (if it's minified)
+- Use dirb, nikto
 
 
 
