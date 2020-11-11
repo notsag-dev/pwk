@@ -598,7 +598,10 @@ VRFY idontexist
 ##### SNMP enumeration
 Over the years, we have often found that the Simple Network Management Protocol (SNMP) is not well-understood by many network administrators. This often results in SNMP misconfigurations, which can result in significant information leakage.
 
-It is based on UDP which is stateless and therefore is susceptible to IP spoofing and replay attacks. SNMP protocols 1, 2, and 2c offer no traffic encryption.
+Issues:
+- It is based on UDP which is stateless and therefore is susceptible to IP spoofing and replay attacks.
+- SNMP protocols 1, 2, and 2c offer no traffic encryption.
+- Traditional SNMP protocols also have weak authentication schemes and are commonly left configured with default public and private community strings.
 
 ###### The SNMP MIB Tree
 The SNMP Management Information Base (MIB) is a database containing information usually related to network management. It has OIDs of resources that can be monitored.
@@ -607,3 +610,43 @@ Scan for SNMP:
 ```
 sudo nmap -sU --open -p 161 10.11.1.1-254
 ```
+
+Using **onesixtyone** we can scan a SNMP server:
+```
+echo public > community
+echo private >> community
+echo manager >> community
+onesixtyone -c community -i ips
+```
+
+Once we find SNMP services, we can start querying them for specific MIB data that might be interesting.
+
+###### Windows SNMP enumeration example
+Scan with snmpwalk using `-c` to set public as the community string, `-v1` to specify snmp version to 1, and `-t` to set timeout perioud to 10 sec.
+```
+snmpwalk -c public -v1 -t 10 10.11.1.14
+```
+
+Enumerate Windows users:
+```
+snmpwalk -c public -v1 10.11.1.14 1.3.6.1.4.1.77.1.2.25
+```
+
+Enumerate running processes:
+```
+snmpwalk -c public -v1 10.11.1.73 1.3.6.1.2.1.25.4.2.1.2
+```
+
+Enumerate open tcp ports:
+```
+snmpwalk -c public -v1 10.11.1.14 1.3.6.1.2.1.6.13.1.3
+```
+
+Enumerate installed software:
+```
+snmpwalk -c public -v1 10.11.1.50 1.3.6.1.2.1.25.6.3.1.2
+```
+
+###
+
+
