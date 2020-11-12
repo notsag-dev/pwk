@@ -670,5 +670,14 @@ Related encoding:
 - URL encoding: percentage encoding, useful for including non-ascii characters in URLs
 - HTML encoding: encode/escape characters that generally have special meaning in HTML
 
+We may need different sets of characters depending on where our input is being included. For example, if our input is being added between div tags, we will need to include our own script tags265 and will need to be able to inject “<” and “>” as part of the payload. If our input is being added within an existing JavaScript tag, we might only need quotes and semicolons to add our own code.
+
+Basic XSS: `<script>alert('hola')</script>`
+Content injection that provokes redirects: `<iframe src=http://10.11.0.4/report height=”0” width=”0”></iframe>`
+
+#### Stealing cookies
+Cookies flags related to security: Secure (only send over encrypted connections) and HttpOnly (don't make it available to JS).
+
+
 
 
