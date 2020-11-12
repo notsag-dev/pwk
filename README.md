@@ -666,4 +666,9 @@ XSS happens when unsanitized input is displayed on a web page.
 
 We can find potential entry points for XSS by examining a web application and identifying input fields (such as search fields) that accept unsanitized input which is displayed as output in subsequent pages.
 
+Related encoding:
+- URL encoding: percentage encoding, useful for including non-ascii characters in URLs
+- HTML encoding: encode/escape characters that generally have special meaning in HTML
+
+
 
