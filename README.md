@@ -656,5 +656,14 @@ Tips:
 - In Firefox's debugger tab, when checking a JS source file, press the curly brackets to expand code (if it's minified)
 - Use dirb, nikto
 
+### XSS (Cross-site scripting)
+XSS happens when unsanitized input is displayed on a web page.
+
+3 types:
+- Stored/Persistent: The exploit payload is stored in a database or otherwise cached by a server. The web application retrieves this payload and displays it to anyone that views a vulnerable page. Ofter found on forums technologies or reviews pages.
+- Reflected: It includes the payload in a crafted request or link. This variant only attacks the person submitting the request or viewing the link. Reflected XSS vulnerabilities can often occur in search fields and results, as well as anywhere user input is included in error messages.
+- DOM-based: This variant occurs when a page’s DOM is modified with user-controlled values. DOM-based XSS can be stored or reflected. The key difference is that DOM-based XSS attacks occur when a browser parses the page’s content and inserted JavaScript is executed.
+
+We can find potential entry points for XSS by examining a web application and identifying input fields (such as search fields) that accept unsanitized input which is displayed as output in subsequent pages.
 
 
