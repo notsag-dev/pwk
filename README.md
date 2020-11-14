@@ -678,6 +678,8 @@ Content injection that provokes redirects: `<iframe src=http://10.11.0.4/report 
 #### Stealing cookies
 Cookies flags related to security: Secure (only send over encrypted connections) and HttpOnly (don't make it available to JS).
 
+### Directory/path traversal
+Most common indicator of vulnerability: file extensions in URL query strings. Then try to access other files.
 
 
 
