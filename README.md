@@ -254,6 +254,14 @@ sudo tcpdump -n -r password_cracking_filtered.pcap | awk -F" " '{print $3 }' | s
 - Add `#!/bin/bash -x` to print the code being executed also and not just its output.
 - Read user input to variable using read: `read response; echo $response`
 - To specify prompt: `read -p 'Username: ' username`. To make user input invisible add `-s`
+- Combine commands outputs:
+```
+{
+c1
+c2
+c3
+} | othercommand
+```
 - Conditions:
 ```
 if [ <some test> ]
