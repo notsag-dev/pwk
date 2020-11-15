@@ -740,3 +740,9 @@ ruby -run -e httpd . -p 9000
 busybox httpd -f -p 10000
 ```
 
+### SQL injection
+We generally begin our attack by inputting a single quote into every field that we suspect might pass its parameter to the database. We will need to use this trial and error approach when black box testing. If we get an error that means the query failed and the field is likely to be vulnerable to SQL injection.
+
+Bypass authentication (hashtag starts a comment for Mariadb): `tom’ or 1=1;#`
+
+Adding `LIMIT 1;#` in the end would just fetch one row. This may be useful when the login is trying to fetch the user that is logging in, and given that 1=1 is true for all of them it may return several rows. Adding the limit keyword it would return just the first one.
