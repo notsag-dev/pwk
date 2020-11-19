@@ -766,3 +766,9 @@ Other flags:
 - `--os-shell` to try to pop a shell
 - `--random-agent` to use a real user agent (otherwise it will use sqlmap).
 - `--delay=0.2`
+
+### Buffer overflow
+Special registers that control the execution of a thread:
+- ESP: Stack pointer, points to the top of the stack
+- EBP: Base pointer, points to the stack frame of a function. This allows the function to access arguments and local variables, and points to the top of the stack at the moment the function is called.
+- EIP: Instruction pointer, points to next instruction to be executed.
