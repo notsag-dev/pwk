@@ -777,7 +777,9 @@ https://github.com/notsag-dev/buffer-overflow
 
 ### Privilege escalation
 Windows
-- `whoami`
+- https://github.com/pentestmonkey/windows-privesc-check
+  - `windows-privesc-check2.exe --dump -G`
+- `whoami`, `whoami 
 - `net user {{username}}`: Get extra info just for Windows
 - `net user`: Without the username, it retrieves information of other user accounts
 - `hostname`
@@ -793,8 +795,25 @@ Windows
 - Enumerating readable/writable files and directories: `accesschk.exe -uws "Everyone" "C:\Program Files"`
 - Enumerating r/w files with Powershell: `PS C:\Tools\privilege_escalation\SysinternalsSuite>Get-ChildItem "C:\Program Files" -Recurse | Get-ACL | ?{$_.AccessToString -match "Everyone\sAllow\s\sModify"}`
 - `mountvol`: Check what volumes are mounted and which ones are available and not mounted (these ones may be interested)
+- List device drivers:
+```
+driverquery.exe /v /fo csv | ConvertFrom-CSV | Select-Object 'Display Name', 'Start Mode', Path
+```
+- List device drivers for specific device:
+```
+Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName, DriverVersion, Manufacturer | Where-Object {$_.DeviceName -like "*VMware*"}
+```
+- Check if all the programs are installed with escalated privileges (if enabled a msi could be created to elevate privileges):
+```
+reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer
+reg query HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer
+```
+- Admin user can run a console at a high integrity level: `powershell.exe Start-Process cmd.exe -Verb runAs`
+- Use sigcheck to see if a program requires administrator permissions and if it has autoElevate activated among other config values: `sigcheck.exe -a -m C:\Windows\System32\fodhelper.exe`
+- Use progmon to analyze how processes interact with the file system and the registry
 
 Linux
+- https://github.com/pentestmonkey/unix-privesc-check.git
 - `whoami`
 - `id`: Get user and group ids
 - `cat /etc/password`
@@ -815,3 +834,6 @@ Linux
 - Get mounted filesystems: `mount`
 - Volumes that will be mounted at boot time: `/etc/fstab`
 - List all available disks and mounted and unmounted partitions: `lsblk`
+- Load kernel modules: `lsmod`
+- Get kernerl module information: `modinfo {{kernel module name obtained using lsmod}}`
+- SUID (run with permissions of file owner): `find / -perm -u=s -type f 2>/dev/null`
