@@ -767,6 +767,10 @@ Other flags:
 - `--random-agent` to use a real user agent (otherwise it will use sqlmap).
 - `--delay=0.2`
 
+Tip: It is possible to capture a request with a proxy and use it to do a sqlmap check:
+1) From request on Burp -> right click -> copy to file
+2) `sqlmap -r login.req --batch` (may have to add --force-ssl
+
 ### Buffer overflow
 Special registers that control the execution of a thread:
 - ESP: Stack pointer, points to the top of the stack
