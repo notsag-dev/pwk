@@ -812,3 +812,6 @@ Linux
 - Query other scheduled tasks (check execution permisions): `/etc/crontab`
 - List all installed packages in a Debian based distro: `dpkg -l`
 - `find / -writable -type d 2>/dev/null`
+- Get mounted filesystems: `mount`
+- Volumes that will be mounted at boot time: `/etc/fstab`
+- List all available disks and mounted and unmounted partitions: `lsblk`
