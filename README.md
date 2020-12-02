@@ -606,7 +606,7 @@ VRFY idontexist
 ```
 
 ##### IMPORTANT
-It has happened several times to me that when SMTP is available in the challenges, part of the solution consists in configuring an email client (like Thunderbird) with the credentials obtained or set using the email server. Then, the email will be `{{username}}@{{IP address of the smtp server}}`, omiting the `.com` or similar.
+It has happened several times to me that when SMTP is available in the challenges, part of the solution consists in configuring an email client (like Thunderbird) with the credentials obtained or set using the email server. Then, the email will be `{{username}}@{{IP address of the smtp server}}`, omiting the `.com` or similar. Check machine HTB solidstate.
 
 #### SNMP enumeration
 Over the years, we have often found that the Simple Network Management Protocol (SNMP) is not well-understood by many network administrators. This often results in SNMP misconfigurations, which can result in significant information leakage.
