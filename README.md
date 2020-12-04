@@ -538,9 +538,47 @@ Server Message Block (SMB) runs on the port 445. At the same time, NetBIOS which
  nmap -v -p 139,445 -oG smb.txt 10.11.1.1-254
 ```
 
+SMBMap:
+```
+kali@kali:~/bastion$ smbmap -H 10.10.10.134 -u guest
+[+] IP: 10.10.10.134:445	Name: 10.10.10.134                                      
+[\] Work[!] Unable to remove test directory at \\10.10.10.134\Backups\AGPMNDYRUX, please remove manually
+        Disk                                                  	Permissions	Comment
+	----                                                  	-----------	-------
+	ADMIN$                                            	NO ACCESS	Remote Admin
+	Backups                                           	READ, WRITE	
+	C$                                                	NO ACCESS	Default share
+	IPC$                                              	READ ONLY	Remote IPC
+```
+
+SMBClient:
+```
+smbclient -L \\10.10.10.134 --user guest 
+Enter WORKGROUP\guest's password: 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	ADMIN$          Disk      Remote Admin
+	Backups         Disk      
+	C$              Disk      Default share
+	IPC$            IPC       Remote IPC
+SMB1 disabled -- no workgroup available
+```
+
+Mount shared folder, eg Backups in the results of SMBMap and SMBClient:
+```
+mkdir mnt/smb
+mount -t cifs //10.10.10.134/Backups /mnt/smb
+```
+
 Also use the more specific tool to get info about NetBIOS: `nbtscan`:
 ```
 sudo nbtscan -r 10.11.1.0/24
+```
+
+SMB login with hashes (obtained using impacket-secretsdump, see other notes):
+```
+smbmap -H 10.10.10.134 -u guest -p aad3b435b51404eeaad3b435b51404ee:26112010952d963c8dc4217daec986d9
 ```
 
 ##### Network File System (NFS)
@@ -791,6 +829,7 @@ Windows
 - `net user`: Without the username, it retrieves information of other user accounts
 - `hostname`
 - `systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"`
+- Go to program files folder to check what's installed. Check if any of those programs is vulnerable.
 - `tasklist /SVC`: Used to list processes
 - `ipconfig /all`
 - `route print`: Print networking routing tables
