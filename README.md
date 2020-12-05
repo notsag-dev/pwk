@@ -565,6 +565,11 @@ Enter WORKGROUP\guest's password:
 SMB1 disabled -- no workgroup available
 ```
 
+Access the sharename Replication using smbclient and open prompt:
+```
+smbclient //10.10.10.100/Replication
+```
+
 Mount shared folder, eg Backups in the results of SMBMap and SMBClient:
 ```
 mkdir mnt/smb
