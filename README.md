@@ -553,7 +553,7 @@ kali@kali:~/bastion$ smbmap -H 10.10.10.134 -u guest
 
 List all files :
 ```
-kali@kali:~/bastion$ smbmap -H 10.10.10.134 -u guest -R Backups
+kali@kali:~/bastion$ smbmap -H 10.10.10.134 -u guest -R Backups --depth=10
 ```
 
 SMBClient:
