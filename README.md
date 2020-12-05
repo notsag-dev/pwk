@@ -551,6 +551,11 @@ kali@kali:~/bastion$ smbmap -H 10.10.10.134 -u guest
 	IPC$                                              	READ ONLY	Remote IPC
 ```
 
+List all files :
+```
+kali@kali:~/bastion$ smbmap -H 10.10.10.134 -u guest -R Backups
+```
+
 SMBClient:
 ```
 smbclient -L \\10.10.10.134 --user guest 
