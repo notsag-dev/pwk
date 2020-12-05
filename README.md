@@ -575,6 +575,14 @@ Access the sharename Replication using smbclient and open prompt:
 smbclient //10.10.10.100/Replication
 ```
 
+Download all files:
+```
+smbclient -H 10.10.10.134/Replication
+> recurse ON
+> prompt OFF
+> mget *
+```
+
 Mount shared folder, eg Backups in the results of SMBMap and SMBClient:
 ```
 mkdir mnt/smb
