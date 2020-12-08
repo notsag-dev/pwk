@@ -906,10 +906,50 @@ Linux
 ### Active Directory
 Service that allows system administrators to update and manage operating systems, applications, users, and data access on a large scale.
 
-Components:
+#### Components
 - Domain controller: Windows server. service that allows system administrators to update and manage operating systems, applications, users, and data access on a large scale. Is a Windows 2000-2019 server with the Active Directory Domain Services role installed. The domain controller stores all information about how the Active Directory instance is configured. It also enforces a vast variety of rules that govern how objects within a given Windows domain interact with each other, and what services and tools are available to end users.
 - Domain: When an instance of Active Directory is configured, a domain is created with a name such as corp.com where corp is the name of the organization. Within this domain, we can add various types of objects, including computer and user objects.
 - Organizational Units (OU): comparable to file system folders in that they are containers used to store and group other objects.
 
+#### Enumeration
+##### Traditional approach: net.exe
+- Enumerate (just) all local accounts: `net user`
+- Enumerate all user in entire domain: `net user /domain`
+- Enumerate one user: `net user {{username}} /domain`
+- Enumerate groups of the domain: `net group /domain`
 
+Unfortunately, the net command line tool cannot list nested groups and only shows the direct user members.
 
+##### Modern approach: using Powershell
+- Get domain: `[System.DirectoryServices.ActiveDirectory.Domain]::GetCurrent Domain()`
+
+Lightweight Directory Access Protocol (LDAP): protocol understood by domain controllers. LDAP supports search functionality against an Active Directory.
+
+LDAP provider path:
+LDAP://HostName[:PortNumber][/DistinguishedName]
+
+DistinguishedName (DN) of the domain, which has a specific naming standard based on specific Domain Components (DC).
+
+```
+$domainObj = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()
+$PDC = ($domainObj.PdcRoleOwner).Name
+$SearchString = "LDAP://"
+$SearchString += $PDC + "/"
+$DistinguishedName = "DC=$($domainObj.Name.Replace('.', ',DC='))"
+$SearchString += $DistinguishedName
+$SearchString
+```
+Example result: `LDAP://DC01.corp.com/DC=corp,DC=com`. This is the full LDAP provider path needed to perform LDAP queries against the domain controller.
+
+Add search:
+```
+$Searcher = New-Object System.DirectoryServices.DirectorySearcher([ADSI]$SearchString)
+$objDomain = New-Object System.DirectoryServices.DirectoryEntry
+$Searcher.SearchRoot = $objDomain
+```
+
+Add search term: enumerate all user in the domain.
+```
+$Searcher.filter="samAccountType=805306368"
+$Searcher.FindAll()
+```
