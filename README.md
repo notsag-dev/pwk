@@ -901,3 +901,15 @@ Linux
 - Load kernel modules: `lsmod`
 - Get kernerl module information: `modinfo {{kernel module name obtained using lsmod}}`
 - SUID (run with permissions of file owner): `find / -perm -u=s -type f 2>/dev/null`
+
+
+### Active Directory
+Service that allows system administrators to update and manage operating systems, applications, users, and data access on a large scale.
+
+Components:
+- Domain controller: Windows server. service that allows system administrators to update and manage operating systems, applications, users, and data access on a large scale. Is a Windows 2000-2019 server with the Active Directory Domain Services role installed. The domain controller stores all information about how the Active Directory instance is configured. It also enforces a vast variety of rules that govern how objects within a given Windows domain interact with each other, and what services and tools are available to end users.
+- Domain: When an instance of Active Directory is configured, a domain is created with a name such as corp.com where corp is the name of the organization. Within this domain, we can add various types of objects, including computer and user objects.
+- Organizational Units (OU): comparable to file system folders in that they are containers used to store and group other objects.
+
+
+
